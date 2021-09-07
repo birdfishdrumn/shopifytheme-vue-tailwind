@@ -1,0 +1,52 @@
+<section class="max-w-3xl mx-auto">
+  <h2 class="text-center my-8 text-2xl font-bold">{{ section.settings.title }}</h2>
+  <div class="grid gap-1 grid-cols-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+  {% comment %} collectionsと複数形に注意 {% endcomment %}
+   {% for product in collections[section.settings.featured_collection].products %}
+ {% assign image = product.featured_media.preview_image  %}
+    <div class="">
+     <div class="card">
+ {% if image != blank %}
+    <img class="card-img-top" src="{{ image | img_url : 'medium' }}">
+    {% else %}
+      {{ 'product-1' | placeholder_svg_tag: 'card-img-top' }}
+ {% endif %}
+ <div class="card-body">
+     <h3><a href="{{product.url}}"> {{ product.title}}</a></h3>
+    <p>   {{ product.price | money}}</p>
+ </div>
+
+ </div>
+
+    </div>
+
+ {% endfor %}
+  </div>
+
+</section>
+
+{% schema %}
+  {
+    "name": "Featured Collection",
+    "class": "featured-collection-section",
+    "settings":[
+      {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Collection"
+      },
+      {
+      "type": "text",
+      "id": "title",
+      "default": "Featured Collection",
+      "label": "title"
+      }
+    ],
+    "presets":[
+      {
+        "category":"Collection",
+        "name": "Featured Collections"
+      }
+    ]
+  }
+{% endschema %}

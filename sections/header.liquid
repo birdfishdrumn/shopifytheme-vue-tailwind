@@ -1,0 +1,48 @@
+<nav class="py-8 bg-green-900 ">
+  <div class="mx-auto  max-w-4xl">
+    <div class="flex justify-between" id="navbarNav">
+      <ul class="flex items-center">
+
+        {% for link in linklists.main-menu.links %}
+    {% assign child_list_handle = link.title | handleize %}
+    {% if linklists[child_list_handle].links != blank %}
+      <li class="text-white">
+      <a  class="nav-link" href="{{ link.url }}">{{ link.title }}</a></li>
+      [{% for childlink in linklists[child_list_handle].links %}
+       <li class="text-white">
+        <a  class="nav-link" href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+        </li>
+      {% endfor %}]
+    {% else %}
+     <li class="mx-6 text-sm">
+      <a  class="text-white font-bold" href="{{ link.url }}">{{ link.title }}</a>
+      </li>
+    {% endif %}
+  {% endfor %}
+      </ul>
+      <ul class="items-center">
+            <li >
+       <a  class="text-white font-bold text-sm"  href="/cart">カート</a>
+        </li>
+      </ul>
+            {% comment %} <a href="{{ routes.cart_url }}" class="text-sm">
+            {% include 'icon-cart' %}
+            <span class="text-sm">{{ 'layout.cart.title' | t }}</span>
+
+          </a> {% endcomment %}
+
+
+    </div>
+  </div>
+</nav>
+
+
+  {% if shop.customer_accounts_enabled %}
+    {% if customer %}
+      <a href="/account">account</a>
+      {{ 'log out'  | customer_logout_link }}
+    {% else %}
+      {{ 'log in ' | customer_login_link }}
+      {{ 'register' | customer_register_link }}
+    {% endif %}
+  {% endif %}
