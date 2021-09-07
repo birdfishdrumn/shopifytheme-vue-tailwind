@@ -43,8 +43,8 @@
       {% endif %}
     {% endunless %}
 
-    <div class="collection-grid-item__title-wrapper">
-      <div class="text-center font-extrabold py-4 text-lg">
+    <div class="collection-grid-item__title-wrapper text-center">
+      <div class="text-center font-extrabold py-4 text-lg border-b-2 border-gray-400 pb-1 inline-block">
         {% if collection.title == blank %}
           {% comment %} {{ 'homepage.onboarding.collection_title' | t }} {% endcomment %}
         {% else %}
@@ -52,7 +52,7 @@
         {% endif %}
       </div>
             {% if collection.description != blank %}
-        <div class="rte collection-description page-width">
+        <div class="text-sm my-2">
           {{ collection.description }}
         </div>
       {% endif %}
