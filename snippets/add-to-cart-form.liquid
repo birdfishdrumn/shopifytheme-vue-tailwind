@@ -1,5 +1,5 @@
 
-<form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+<form  id="add-to-cart-form">
   <select name="id" id="productSelect">
     {% for variant in product.variants %}
       {% if variant.available %}
@@ -16,5 +16,44 @@
   {{ current_variant.price | money }}
   <label for="Quantity">quantity</label>
   <input type="number" id="Quantity" name="quantity" value="1" min="1">
-  <button type="submit" name="add" id="AddToCart">Add to cart</button>
+  <button @click="addToCart" type="submit" name="add" id="AddToCart">Add to cart</button>
+  ${ variant }
 </form>
+<script>
+  if(document.querySelector("#add-to-cart-form")){
+    const productForm = Vue.createApp({
+      delimiters: ['${','}'],
+      data(){
+        return {
+          variant: ""
+        }
+      },
+      created (){
+        const getRes = async() => {
+          const result = await axios.get("/products/{{ product.handle }}.js")
+          console.log(result)
+         this.variant = await result.data.variants[0].id
+        }
+        getRes()
+
+      },
+      methods: {
+         async addToCart(event){
+          event.preventDefault()
+
+          let data = {
+            id: this.variant,
+            quantity:1
+          }
+         try{
+ const res =await axios.post("/cart/add.js",data)
+ console.log(res)
+         }catch(e){
+           console.error(e)
+         }
+        }
+      }
+
+    }).mount("#add-to-cart-form")
+  }
+</script>
