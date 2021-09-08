@@ -1,0 +1,18 @@
+<div>
+    <div @click="option.visible = !option.visible">
+       ${ option.name } <span>${ selected[i]}</span>
+    </div>
+    <div v-if="option.visible">
+      <template v-for="(value, index) in option.values">
+        <div
+        @click="
+        selected[i] = value;
+        option.visible = false;
+        form.selections[i] = value;
+        "
+        >
+          ${ value }
+        </div>
+      </template>
+    </div>
+</div>
