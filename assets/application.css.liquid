@@ -13405,6 +13405,11 @@ video {
   color: rgba(131, 24, 67, var(--tw-text-opacity));
 }
 
+.hover\:text-gray-600:hover {
+  --tw-text-opacity: 1;
+  color: rgba(75, 85, 99, var(--tw-text-opacity));
+}
+
 .text-opacity-0 {
   --tw-text-opacity: 0;
 }
@@ -15615,6 +15620,10 @@ video {
 }
 
 @media (min-width: 640px) {
+  .upsm\:mr-16 {
+    margin-right: 4rem;
+  }
+
   .upsm\:hidden {
     display: none;
   }
@@ -15631,5 +15640,9 @@ video {
 
   .sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sm\:flex-col {
+    flex-direction: column;
   }
 }
