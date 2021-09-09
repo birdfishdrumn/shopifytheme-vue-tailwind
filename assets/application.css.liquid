@@ -571,6 +571,12 @@ video {
   width: 100%;
 }
 
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -15608,7 +15614,17 @@ video {
   }
 }
 
+@media (min-width: 640px) {
+  .upsm\:hidden {
+    display: none;
+  }
+}
+
 @media (max-width: 639px) {
+  .sm\:hidden {
+    display: none;
+  }
+
   .sm\:grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
