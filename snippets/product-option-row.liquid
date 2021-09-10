@@ -1,6 +1,9 @@
 <div>
     <div @click="option.visible = !option.visible">
-       ${ option.name } <span>${ selected[i]}</span>
+
+                ${ option.name } <span>${ selected[i]}</span>
+
+
     </div>
     <div v-if="option.visible">
       <template v-for="(value, index) in option.values">
