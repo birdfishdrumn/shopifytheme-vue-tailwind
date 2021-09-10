@@ -1,4 +1,4 @@
-<header class="py-8 fixed w-screen z-10 top-0 right-0 left-0 border-b-2 bg-white">
+<header id="header" class="py-8 fixed w-screen z-10 top-0 right-0 left-0 border-b-2 bg-white">
 <nav class="">
   <div class="mx-auto  max-w-4xl px-4">
     <div class="flex justify-between" id="navbarNav">
@@ -24,7 +24,12 @@
       <div class="upsm:hidden font-bold  hover:text-gray-600">Menu</div>
       <ul class="items-center">
             <li >
-       <a  class=" font-bold text-sm"  href="/cart">カート</a>
+       <span  class=" font-bold text-sm"  href="/cart">
+        <template v-if="cart">
+          カート(${cart.item_count})
+        </template>
+
+       </span>
         </li>
       </ul>
           </a>
@@ -37,12 +42,43 @@
 </header>
 
 
-  {% if shop.customer_accounts_enabled %}
-    {% if customer %}
-      <a href="/account">account</a>
-      {{ 'log out'  | customer_logout_link }}
-    {% else %}
-      {{ 'log in ' | customer_login_link }}
-      {{ 'register' | customer_register_link }}
-    {% endif %}
-  {% endif %}
+  <script>
+
+    console.log(store.state.cartState)
+
+    if(document.querySelector("#header")){
+      const headerCart = Vue.createApp({
+
+        delimiters: ['${', '}'],
+        data(){
+          return {
+            cartData: store.state.cartState
+          }
+        },
+        methods:{
+
+        },
+        computed: {
+          miniCart(){
+            return miniCartState.hidden
+          },
+          menuDrawer(){
+            return menuState.hidden
+          },
+          cart(){
+
+            return this.cartData[0]
+
+          }
+        },
+        created(){
+          store.getCart()
+
+        }
+      }).mount("#header")
+    }
+
+  </script>
+
+  {% comment %} computedはuseEffectのようなもの {% endcomment %}
+        {% comment %} delimitersの中は全て'にする {% endcomment %}

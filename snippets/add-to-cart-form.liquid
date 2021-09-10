@@ -13,6 +13,7 @@
   {% comment %} ${ variant } {% endcomment %}
 </form>
 <script>
+
   if(document.querySelector("#add-to-cart-form")){
     const productForm = Vue.createApp({
       delimiters: ['${','}'],
@@ -62,9 +63,11 @@
             id: selectedVariant.id,
             quantity:1
           }
+
          try{
  const res =await axios.post("/cart/add.js",data)
- console.log(res)
+
+ await store.getCart()
          }catch(e){
            console.error(e)
          }
